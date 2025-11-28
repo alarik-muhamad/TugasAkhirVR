@@ -6,25 +6,67 @@
 
     <script src="https://realitas.id/VRTour/aframe-master.js"></script>
     <script src="https://realitas.id/VRTour/aframe-href-component.js"></script>
+
+    <script>
+        AFRAME.registerComponent('info-panel-system', {
+            init: function () {
+                // --- PANEL FUNCTIONS ---
+                function openPanel(el) {
+                    el.setAttribute('visible', 'true');
+                    el.setAttribute('scale', '1 1 1');
+                }
+                
+                function closePanel(el) {
+                    el.setAttribute('visible', 'false');
+                    el.setAttribute('scale', '0 0 0');
+                }
+
+                // --- PANEL 1: RUANG BACA ---
+                var infoBtn1 = this.el.querySelector('#info_btn_1');
+                var infoPanel1 = this.el.querySelector('#info_panel_1');
+                var closeBtn1 = this.el.querySelector('#close_btn_1');
+
+                closePanel(infoPanel1); // Init close
+
+                infoBtn1.addEventListener('click', function () {
+                    openPanel(infoPanel1);
+                });
+                closeBtn1.addEventListener('click', function () {
+                    closePanel(infoPanel1);
+                });
+
+                // --- PANEL 2: RUANG KERJA BERSAMA ---
+                var infoBtn2 = this.el.querySelector('#info_btn_2');
+                var infoPanel2 = this.el.querySelector('#info_panel_2');
+                var closeBtn2 = this.el.querySelector('#close_btn_2');
+
+                closePanel(infoPanel2); // Init close
+
+                infoBtn2.addEventListener('click', function () {
+                    openPanel(infoPanel2);
+                });
+                closeBtn2.addEventListener('click', function () {
+                    closePanel(infoPanel2);
+                });
+            }
+        });
+    </script>
 </head>
 
 <body>
 
-    <a-scene>
+    <a-scene info-panel-system>
 
-        <!-- Assets -->
         <a-assets>
             <img id="bg" src="skybox/RKB.JPG">
             <img id="arrow" src="assets/arrow.png">
         </a-assets>
 
-        <!-- Camera Object -->
         <a-entity position="0 0 0" rotation="0 90 0">
             <a-camera id="camera"
                       look-controls
                       wasd-controls-enabled="false">
 
-                <!-- Cursor -->
                 <a-entity id="cursor"
                     cursor="fuse: true; fuseTimeout: 1500"
                     position="0 0 -1"
@@ -38,45 +80,58 @@
             </a-camera>
         </a-entity>
 
-        <!-- Background -->
         <a-sky src="#bg"></a-sky>
 
-        <!-- NAV BUTTON - F Lantai 2 -->
-        <a-entity id="item001"
-                  position="5.5 0 -0.1"
-                  rotation="-90 90 188">
-
-            <a-image src="#arrow"
-                     transparent="true"
-                     href="f2.html">
-            </a-image>
-
-            <a-text font="kelsonsans"
-                    width="6"
-                    align="center"
-                    value="F Lantai 2"
-                    position="0.15 1.3 0.4"
-                    rotation="60 0 0">
-            </a-text>
+        <a-entity id="item001" position="5.5 0 -0.1" rotation="-90 90 188">
+            <a-image src="#arrow" transparent="true" href="f2.html"></a-image>
+            <a-text font="kelsonsans" width="6" align="center" value="F Lantai 2" position="0.15 1.3 0.4" rotation="60 0 0"></a-text>
         </a-entity>
 
-        <!-- NAV BUTTON - G Lantai 2 -->
-        <a-entity id="item003"
-                  position="-6 0 0"
-                  rotation="-90 90 0">
+        <a-entity id="item003" position="-6 0 0" rotation="-90 90 0">
+            <a-image src="#arrow" transparent="true" href="g2.html"></a-image>
+            <a-text font="kelsonsans" width="6" align="center" value="G Lantai 2" position="0 1.3 0.4" rotation="60 0 0"></a-text>
+        </a-entity>
 
-            <a-image src="#arrow"
-                     transparent="true"
-                     href="g2.html">
-            </a-image>
 
-            <a-text font="kelsonsans"
-                    width="6"
-                    align="center"
-                    value="G Lantai 2"
-                    position="0 1.3 0.4"
-                    rotation="60 0 0">
+        <a-entity position="0 1.5 -3" rotation="0 0 0">
+            <a-circle id="info_btn_1" color="#3366cc" radius="0.2">
+                <a-text value="i" align="center" color="white" width="4" position="0 0 0.01"></a-text>
+            </a-circle>
+            <a-text value="Ruang Baca" align="center" width="3" position="0 -0.5 0"></a-text>
+        </a-entity>
+
+        <a-entity id="info_panel_1" visible="false" scale="0 0 0" position="0 1.6 -2" rotation="0 0 0">
+            <a-plane color="black" opacity="0.9" width="2.7" height="1.6"></a-plane>
+            
+            <a-text value="Ruang Baca terletak di Gedung F Lantai 2 dan berfungsi sebagai pusat referensi akademik dengan total koleksi 15.678 buku fisik, meliputi literatur, laporan PKL, skripsi, dan tesis. Untuk karya ilmiah tahun 2012-2020 tersedia dalam bentuk fisik, sedangkan karya mulai pertengahan 2021 tersedia dalam format digital. Buku literatur dapat dipinjam maksimal 4 buku selama 14 hari, namun koleksi skripsi dan tesis hanya dapat dibaca di tempat. Jam operasional layanan adalah Senin-Kamis (07.30-16.00 WIB) dan Jumat (sampai 16.30 WIB)."
+                    align="center" width="2.2" position="0 0 0.01">
             </a-text>
+
+            <a-entity id="close_btn_1" position="1.2 0.65 0.02">
+                <a-circle color="#cc3333" radius="0.15"></a-circle>
+                <a-text value="X" align="center" width="4" position="0 0 0.01"></a-text>
+            </a-entity>
+        </a-entity>
+
+
+        <a-entity position="0 1.5 3" rotation="0 180 0">
+            <a-circle id="info_btn_2" color="#3366cc" radius="0.2">
+                <a-text value="i" align="center" color="white" width="4" position="0 0 0.01"></a-text>
+            </a-circle>
+            <a-text value="Ruang Kerja Bersama" align="center" width="3" position="0 -0.5 0"></a-text>
+        </a-entity>
+
+        <a-entity id="info_panel_2" visible="false" scale="0 0 0" position="0 1.6 2" rotation="0 180 0">
+            <a-plane color="black" opacity="0.9" width="2.7" height="1.6"></a-plane>
+            
+            <a-text value="RKB terletak di Gedung F Lantai 2 dengan luas 112 m². Fasilitas ini dirancang untuk kolaborasi dan produktivitas mahasiswa, dilengkapi dengan AC, Wi-Fi, 25 meja, 36 kursi, serta stopkontak di setiap meja. Ruangan ini beroperasi hari Senin-Jumat pukul 07.30-20.00 WIB dan sangat ideal untuk pengerjaan tugas kelompok, brainstorming ide, serta pengembangan teknologi."
+                    align="center" width="2.2" position="0 0 0.01">
+            </a-text>
+
+            <a-entity id="close_btn_2" position="1.2 0.65 0.02">
+                <a-circle color="#cc3333" radius="0.15"></a-circle>
+                <a-text value="X" align="center" width="4" position="0 0 0.01"></a-text>
+            </a-entity>
         </a-entity>
 
     </a-scene>
