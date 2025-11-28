@@ -12,15 +12,14 @@
 
     <a-scene>
 
-        <!-- Assets -->
         <a-assets>
             <img id="bg" src="skybox/INDEX.JPG">
             <img id="arrow" src="assets/arrow.png">
         </a-assets>
 
-        <a-entity position="0 0 0" rotation="12 63 0">
+        <a-entity position="0 0 0" rotation="0 0 0">
             <a-camera id="camera"
-                      look-controls
+                      look-controls="touchEnabled: true; magicWindowTrackingEnabled: true"
                       wasd-controls-enabled="false">
 
                 <a-entity id="cursor"
@@ -36,10 +35,8 @@
             </a-camera>
         </a-entity>
 
-        <!-- Skybox -->
-        <a-sky src="#bg"></a-sky>
+        <a-sky src="#bg" rotation="0 -63 0"></a-sky>
 
-        <!-- NAV BUTTON - Lantai 1 -->
         <a-entity id="item001"
                   position="-3 1.7 -1.45"
                   rotation="0 50 0">
@@ -48,7 +45,7 @@
                      transparent="true"
                      href="f.html"
                      opacity="0">
-            </a-image>
+                </a-image>
         </a-entity>
 
     </a-scene>
