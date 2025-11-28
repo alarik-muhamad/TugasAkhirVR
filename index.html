@@ -5,34 +5,22 @@
     <title>WEBVR - Virtual Tour FILKOM UB</title>
 
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-
-    <script>
-        AFRAME.registerComponent('href', {
-            schema: {default: ''},
-            init: function () {
-                var url = this.data;
-                this.el.addEventListener('click', function () {
-                    if(url && url.length > 0) {
-                        window.location.href = url;
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="https://realitas.id/VRTour/aframe-href-component.js"></script>
 </head>
 
 <body>
 
     <a-scene>
 
+        <!-- Assets -->
         <a-assets>
             <img id="bg" src="skybox/INDEX.JPG">
             <img id="arrow" src="assets/arrow.png">
         </a-assets>
 
-        <a-entity position="0 0 0" rotation="0 0 0">
+        <a-entity position="0 0 0" rotation="12 63 0">
             <a-camera id="camera"
-                      look-controls="reverseMouseDrag: true"
+                      look-controls
                       wasd-controls-enabled="false">
 
                 <a-entity id="cursor"
@@ -40,6 +28,7 @@
                     position="0 0 -1"
                     geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
                     material="color: white; shader: flat"
+
                     animation__fusing="property: geometry.radiusOuter; from: 0.050; to: 0.010; startEvents: fusing; easing: easeInQuad; dur: 1000"
                     animation__fusing2="property: geometry.radiusInner; from: 0.050; to: 0.005; startEvents: fusing; easing: easeInQuad; dur: 1000">
                 </a-entity>
@@ -47,15 +36,18 @@
             </a-camera>
         </a-entity>
 
-        <a-sky src="#bg" rotation="12 60 0"></a-sky>
+        <!-- Skybox -->
+        <a-sky src="#bg"></a-sky>
 
+        <!-- NAV BUTTON - Lantai 1 -->
         <a-entity id="item001"
                   position="-3 1.7 -1.45"
-                  rotation="0 60 0">
+                  rotation="0 50 0">
 
             <a-image src="#arrow"
+                     transparent="true"
                      href="f.html"
-                     opacity="0"> 
+                     opacity="0">
             </a-image>
         </a-entity>
 
